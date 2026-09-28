@@ -1,21 +1,17 @@
-# Suggested starter prompts
+# Starter prompts
 
-Add these four prompts to Agent Builder.
+## Choose an approach
 
-## Which tool?
+Should I use Chat, Cowork, or an Agent for this task?
 
-> Should I use Chat, Cowork, or an Agent for this task?
+## Estimate Cowork credits
 
-## Estimate credits
-
-> Estimate the Cowork credits for: `<describe your task>`.
+Estimate the Cowork credits for this task: <describe your task>.
 
 ## Make it an Agent
 
-> I do this every week—help me turn it into an Agent.
+I do this every week—help me turn it into an Agent.
 
-## Cheapest path
+## Find the lowest cost
 
-> What’s the cheapest way to get this done in Copilot?
-
-Every answer should end with a level-up tip that helps the user choose the lightest capable tool and build an Efficiency Combo.
+What is the lowest-cost way to get this done in Copilot?

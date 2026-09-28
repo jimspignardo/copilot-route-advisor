@@ -1,62 +1,35 @@
-# Agent Builder setup
+# Agent setup
 
-## 1. Create the agent
+## Package source
 
-Open Microsoft 365 Copilot and create an agent with Agent Builder.
+The package/ directory contains all five files from the supplied Copilot Route Advisor.zip export, unchanged. It preserves the application and agent IDs, manifest version 1.28, declarative-agent version v1.8, and application version 1.0.4.
 
-Use:
+Run the packaging command in the README to create dist/copilot-route-advisor.zip. Use your organization's supported Microsoft 365 package deployment process and verify schema, skill support, permissions, and capabilities in the target environment before installation.
 
-- **Name:** Route It!
-- **Description:** Copy from [`../agent/description.md`](../agent/description.md)
-- **Icon:** 🏆 or a trophy-style custom icon
+## Manual recreation
 
-## 2. Add the instructions
+1. Create an agent in Microsoft 365 Copilot Agent Builder named **Copilot Route Advisor**.
+2. Copy the description from [agent/description.md](../agent/description.md).
+3. Paste the complete [instructions](../agent/instructions.md).
+4. Add the four [starter prompts](../agent/starter-prompts.md).
+5. Configure WebSearch and CodeInterpreter to match the export, subject to tenant policy.
+6. Include [cowork-session-estimator](../package/skills/cowork-session-estimator/SKILL.md) using the skill mechanism supported by your environment.
 
-Copy the complete contents of [`../agent/instructions.md`](../agent/instructions.md) into the instructions field.
+Copying only the main instructions does not install the referenced skill. If your authoring surface cannot include skills, use a compatible package deployment surface or resolve that limitation before claiming equivalent behavior.
 
-If the field has a character limit in your tenant:
+The export has no custom actions or private knowledge sources. Add organization-specific knowledge only when needed and with appropriate access controls.
 
-1. Preserve the Role, Three Options, Decision Rules, Output Format, and Guardrails.
-2. Shorten examples before shortening behavioral rules.
-3. Test that the five-signal scorecard and route decision remain consistent.
+## Acceptance checks in Microsoft 365
 
-## 3. Add starter prompts
-
-Add the four prompts from [`../agent/starter-prompts.md`](../agent/starter-prompts.md).
-
-## 4. Configure knowledge and capabilities
-
-Route It! can operate without private knowledge sources because its main job is routing.
-
-Recommended:
-
-- Enable web search only if your organization permits it and you want the agent to check current product documentation.
-- Do not enable image generation or code interpreter unless you extend the use case.
-- Optionally add your organization’s Copilot adoption guide, licensing summary, approved scenarios, and escalation contacts.
-
-Do not upload confidential financial, security, or licensing documents unless access is appropriately governed.
-
-## 5. Test the routing matrix
-
-| Test prompt | Expected route |
+| Prompt or scenario | Expected behavior |
 |---|---|
-| “Rewrite this email to be more concise.” | Chat |
-| “Create a presentation using our files, email it to the team, and schedule a review.” | Cowork |
-| “Every Friday, I turn the same report into a leadership update.” | Agent |
-| “Summarize this open document.” | Chat |
-| “Build a reusable HR policy question helper for my team.” | Agent |
+| Rewrite this email concisely. | Chat, with five-signal assessment and next steps |
+| Compare several files and create a one-off briefing. | Cowork, assuming capabilities support the requested work |
+| Turn the same weekly report into a leadership update. | Agent implementation plan |
+| Run a task unattended on a schedule. | Consult current Cowork support before routing |
+| Use a custom connector to update an external system. | Explain the full Copilot Studio boundary |
+| Estimate credits for a Cowork session. | Invoke the skill, show seven drivers and assumptions, avoid unsupported precision |
+| Convert an estimate into currency without my credit rate. | Ask for the actual rate or leave the estimate in credits |
+| A material detail is missing. | Ask one concise question and pause |
 
-Also test ambiguous tasks and confirm the agent asks only one clarifying question.
-
-## 6. Validate cost language
-
-Confirm that the agent:
-
-- labels all numbers as estimates;
-- shows the four cost drivers;
-- never invents a credit total without a validated planning band;
-- points users to Microsoft Cost Management and the Customer Cowork Estimator.
-
-## 7. Publish and iterate
-
-Start with a small audience. Review misrouted prompts, update the decision logic, and add organization-specific examples only after observing real usage.
+Confirm that responses have no game-show points, badges, fuel gauges, or celebratory framing. Check official citations and verify skill execution, permissions, and actual session behavior in your tenant. Local packaging checks cannot prove these outcomes.

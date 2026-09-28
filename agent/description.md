@@ -1,24 +1,11 @@
-# Agent Builder fields
+# Agent setup fields
 
-## Name
+- **Name:** Copilot Route Advisor
+- **Previous name:** Route It!
+- **Package version:** 1.0.4
+- **Description:** A clear, practical guide that helps you choose the lowest-cost, best-fit Microsoft Copilot approach for a task, Copilot Chat, Copilot Cowork, or a custom Agent, and explains how to proceed.
+- **Capabilities in the supplied export:** WebSearch and CodeInterpreter.
+- **Skill:** cowork-session-estimator.
+- **Icons:** Use the supplied color.png and outline.png in package/.
 
-Route It!
-
-## Description
-
-A friendly, game-show-style guide that scores your task, recommends Copilot Chat, Copilot Cowork, or Agent Builder, and shows the lightest-cost path that fully gets the job done.
-
-## One-line purpose
-
-Choose the right Copilot route before spending time—or credits.
-
-## Suggested icon
-
-🏆
-
-## Suggested theme
-
-- Primary: deep navy
-- Secondary: teal
-- Accent: trophy gold
-- Tone: upbeat, practical, and concise
+The package manifests are the source of truth. The agent ID and application ID are preserved from the supplied export.

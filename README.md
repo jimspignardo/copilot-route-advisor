@@ -1,86 +1,66 @@
-# 🏆 Route It!
+# Copilot Route Advisor
 
-**Route It!** is a friendly, game-show-style Microsoft 365 Copilot agent that helps people choose the lowest-cost, best-fit way to complete a task:
+**Copilot Route Advisor**, formerly **Route It!**, helps users choose the lightest Microsoft Copilot approach that fully meets their task: **Copilot Chat**, **Copilot Cowork**, or a **custom Agent**.
 
-- 💬 **Copilot Chat** for a quick, one-session answer
-- 🤝 **Copilot Cowork** for a one-off, multi-step job across apps
-- 🧠 **Agent Builder** for repeatable work or a helper others will reuse
+This repository includes the complete supplied **1.0.4** Agent Builder export, readable instructions, setup guidance, and a repeatable package validator.
 
-The guiding principle is simple:
+## What changed
 
-> Recommend the lightest tool that fully does the job.
+- A professional, concise voice replaces the game-show framing, points, badges, and fuel gauges.
+- Five Yes/No signals support the recommendation, confidence, rationale, and practical next steps.
+- Scheduled, unattended, and event-driven requests require checking current official Cowork guidance before routing.
+- External-system actions, custom connectors, and unsupported durable automation are directed to the full Copilot Studio experience.
+- The new **cowork-session-estimator** skill covers seven estimation drivers, low-to-high planning ranges, uncertainty, comparable-session calibration, and currency conversion using an actual organization-specific rate.
+- Agent recommendations include a name, purpose, build surface, knowledge sources, capabilities, ready-to-paste instructions, starter prompts, and a test tip.
 
-![Route It starter prompts](assets/starter-prompts.png)
+These describe the supplied agent's intended behavior. Runtime behavior still needs testing in the target Microsoft 365 environment.
 
-## What it does
+## Choose a route
 
-For every task, Route It!:
-
-1. Scores five decision signals.
-2. Recommends Chat, Cowork, or an Agent.
-3. Explains the choice in plain language.
-4. Gives a practical 3–6 step implementation path.
-5. Estimates Cowork credits when Cowork is recommended.
-6. Produces an Agent Builder implementation plan when recurring work should become an agent.
-7. Rewards efficient choices with a light game-show scoring system.
-
-## Decision shortcut
-
-| Task shape | Route |
+| Task shape | Default recommendation |
 |---|---|
-| One question or one draft | 💬 Copilot Chat |
-| One multi-step job across apps | 🤝 Copilot Cowork |
-| The same shaped job repeatedly | 🧠 Agent Builder |
+| One question or a task that fits in one answer | Copilot Chat |
+| A one-off, multi-step or multi-app task | Copilot Cowork |
+| A recurring task or reusable helper | Agent |
+| Scheduling, unattended execution, or event triggers | Verify current support before choosing |
+| External systems, custom connectors, or unsupported durable automation | Full Copilot Studio experience |
+
+See the [decision guide](docs/decision-guide.md) for precedence and boundaries.
+
+## Get started
+
+Read the [setup guide](docs/agent-builder-setup.md), then use the supplied files in [package/](package/) or the readable [instructions](agent/instructions.md), [description](agent/description.md), and [starter prompts](agent/starter-prompts.md).
+
+Build a validated ZIP with PowerShell 7:
+
+```powershell
+pwsh -NoProfile -File scripts/package.ps1
+```
+
+The output is `dist/copilot-route-advisor.zip`. It contains only the package files, with `manifest.json` at the ZIP root. Validation checks package structure and documentation synchronization, not tenant compatibility or successful installation.
 
 ## Repository contents
 
 | Path | Purpose |
 |---|---|
-| [`agent/instructions.md`](agent/instructions.md) | Ready-to-paste Agent Builder instructions |
-| [`agent/starter-prompts.md`](agent/starter-prompts.md) | Suggested starter prompts |
-| [`agent/description.md`](agent/description.md) | Agent name, description, and setup fields |
-| [`docs/agent-builder-setup.md`](docs/agent-builder-setup.md) | Step-by-step setup instructions |
-| [`docs/decision-guide.md`](docs/decision-guide.md) | Human-readable routing logic |
-| [`docs/credit-estimator.md`](docs/credit-estimator.md) | Planning rubric and limitations |
+| [package/manifest.json](package/manifest.json) | Microsoft 365 app manifest, version 1.0.4 |
+| [package/declarativeAgent_0.json](package/declarativeAgent_0.json) | Agent definition and routing instructions |
+| [Estimator skill](package/skills/cowork-session-estimator/SKILL.md) | Complete supplied estimation workflow |
+| [agent/](agent/) | Readable setup fields, instructions, and starter prompts |
+| [docs/](docs/) | Setup, routing, estimation, and manual acceptance checks |
+| [CHANGELOG.md](CHANGELOG.md) | Rename and behavior changes |
+| [scripts/package.ps1](scripts/package.ps1) | Validation and ZIP packaging |
 
-## Build it in Agent Builder
+## Cost guidance and official references
 
-1. Open **Microsoft 365 Copilot** and create a new agent with **Agent Builder**.
-2. Name it **Route It!**
-3. Paste the description from [`agent/description.md`](agent/description.md).
-4. Paste [`agent/instructions.md`](agent/instructions.md) into the agent instructions.
-5. Add the prompts from [`agent/starter-prompts.md`](agent/starter-prompts.md).
-6. Test with quick, multi-app, recurring, and ambiguous tasks.
-7. Publish it for yourself or your intended Microsoft 365 audience.
+Estimates are planning ranges, not bills. The supplied skill requires current official guidance, explicit assumptions, and an actual organization-specific rate before currency conversion. It does not provide a universal driver-to-credit formula. Without a defensible calibration basis, do not invent numeric precision.
 
-See the complete [Agent Builder setup guide](docs/agent-builder-setup.md).
+- [Microsoft Cowork What's New](https://learn.microsoft.com/en-us/microsoft-365/copilot/cowork/whats-new)
+- [Microsoft Copilot Credits Guide](https://www.microsoft.com/licensing/guidance/Copilot-Credits)
+- [Estimator guide and limitations](docs/credit-estimator.md)
 
-## Starter prompts
-
-- **Which tool?** — “Should I use Chat, Cowork, or an Agent for this task?”
-- **Estimate credits** — “Estimate the Cowork credits for: `<describe your task>`.”
-- **Make it an Agent** — “I do this every week—help me turn it into an Agent.”
-- **Cheapest path** — “What’s the cheapest way to get this done in Copilot?”
-
-## Pricing note
-
-Cowork is usage-based and funded with Copilot Credits. Microsoft currently lists pay-as-you-go credits at **$0.01 USD per credit**, while prepaid plans can offer lower per-credit cost. Route It!’s cost bands are a transparent planning heuristic—not a Microsoft billing quote.
-
-For authoritative information, see:
-
-- [Copilot Cowork overview](https://learn.microsoft.com/en-us/microsoft-365/copilot/cowork/)
-- [Cowork common questions](https://learn.microsoft.com/en-us/microsoft-365/copilot/cowork/cowork-faq)
-- [Usage-based billing and Copilot Credits](https://learn.microsoft.com/en-us/microsoft-365/copilot/usage-based-billing-overview-copilot-credits)
-- [Manage Copilot Credits](https://learn.microsoft.com/en-us/microsoft-365/copilot/usage-based-billing-manage-copilot-credits)
-- [Microsoft Cowork adoption guidance](https://adoption.microsoft.com/en-us/copilot/cowork/ai-user/)
-
-## Important limitations
-
-- Product capabilities, licensing, and pricing can change.
-- Credit estimates are directional and must always be labeled as estimates.
-- Sensitive or regulated actions require appropriate human review and organizational controls.
-- Route It! does not replace Microsoft documentation, tenant policy, legal review, or financial approval.
+The supplied package uses WebSearch and CodeInterpreter and contains no configured custom actions. Availability, licensing, skills support, and deployment permissions must be checked in the target environment. Publishing this repository does not install the agent in Microsoft 365.
 
 ## License
 
-Released under the [MIT License](LICENSE).
+[MIT](LICENSE).

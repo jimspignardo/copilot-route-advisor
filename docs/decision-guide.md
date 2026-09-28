@@ -1,37 +1,30 @@
-# Route It! decision guide
+# Copilot Route Advisor decision guide
 
-## Core rule
+The supplied instructions recommend the lightest option that fully meets the task.
 
-Choose the lightest tool that fully completes the task.
+## Assess five signals
 
-```text
-Is it a simple question, draft, summary, or analysis?
-├─ Yes → Copilot Chat
-└─ No
-   └─ Will the same shaped task repeat or be reused?
-      ├─ Yes → Agent Builder
-      └─ No
-         └─ Does it require multiple steps, apps, or actions?
-            ├─ Yes → Copilot Cowork
-            └─ No → Copilot Chat
-```
+Multi-step, multi-app or multi-source, recurring or reusable, runs unattended, and fits in one answer are assessed as Yes or No.
 
-## Five signals
+## Apply boundaries before the default shortcut
 
-| Signal | What it indicates |
+For scheduled, unattended, or event-driven work, consult [Cowork What's New](https://learn.microsoft.com/en-us/microsoft-365/copilot/cowork/whats-new). Recommend Cowork when the requested pattern is supported. Otherwise use the full Copilot Studio experience.
+
+External-system actions, custom connectors, and unsupported durable automation are routed to the full Copilot Studio experience.
+
+## Default selection
+
+| Condition | Route |
 |---|---|
-| Multi-step | Cowork may be useful |
-| Multi-app | Cowork may be useful |
-| Recurring | An Agent is usually the better investment |
-| Runs unattended | Cowork or a more advanced agent workflow may be needed |
-| One-shot answer | Chat is usually sufficient |
+| Fits in one answer with no other signal | Chat |
+| Recurring or reusable | Agent |
+| Multi-step or multi-app, not recurring | Cowork |
+| Cowork versus Agent tie | Agent if repeated, otherwise Cowork |
 
-## Tie breakers
+State assumptions. Ask one concise question and pause if a missing detail could change the recommendation.
 
-- Recurring beats multi-step: build an Agent when the task has a stable, repeatable shape.
-- One-off beats reusable: use Cowork when the workflow is complex but not likely to repeat.
-- Simplicity wins: use Chat whenever the task can be completed well in one interaction.
+## Response
 
-## Boundaries
+Show the task, recommendation, five-signal table, confidence, two-sentence rationale, and three to six practical steps. For cost questions, use the estimator skill. For Agent recommendations, include the full implementation plan in [the instructions](../agent/instructions.md).
 
-Agent Builder is appropriate for no-code, knowledge-grounded helpers. A scenario may require Copilot Studio rather than Agent Builder when it must connect to external systems, execute complex workflows, or serve a broad managed audience. Route It! mentions that boundary only when it is relevant.
+Agent Builder is the specified starting point for no-code personal or small-team helpers. Full Copilot Studio is the specified route for external systems, durable workflows, or broad deployment. These are routing instructions from the export; current product support must be checked when applied.
